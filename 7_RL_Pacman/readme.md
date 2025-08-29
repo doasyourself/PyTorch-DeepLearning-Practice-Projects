@@ -1,6 +1,8 @@
 运行`python pacman.py`即可启动游戏，用方向键控制agent移动。
 ![example_image](./data/example_image.png)
 
+python pacman.py -p TrainingRLAgent -n 20 --frameTime 0.001
+
 待优化：
 在实现RLAgent时，需要用到layout，ghost_num等参数，这里直接用了默认值，可以修改pacman代码更好地对齐。
 

@@ -166,6 +166,7 @@ class RLAgent(Agent):
             
             # 判断游戏是否结束
             done = state.isWin() or state.isLose()
+            print(done)
             
             # 将经验添加到回放缓冲区（状态、动作、奖励、下一状态、是否结束）
             self.memory.add(self.last_state, 

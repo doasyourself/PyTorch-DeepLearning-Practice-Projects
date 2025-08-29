@@ -122,7 +122,7 @@ PyTorch
 
 ### 🎯 项目概述
 
-本项目基于从豆瓣爬取的中文影评数据集，使用 PyTorch 实现了一个 Transformer 模型进行二分类任务（正面/负面情感）。  
+本项目基于从豆瓣爬取的[中文影评数据集](https://huggingface.co/datasets/wang-king/chinese_movie_reviews)，使用 PyTorch 实现了一个 Transformer 模型进行二分类任务（正面/负面情感）。  
 项目使用 bert-base-chinese 分词器对中文文本进行预处理，并通过 Transformer 架构捕捉评论的语义信息，旨在实现高效、准确的情感分类。  
 
 
