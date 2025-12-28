@@ -8,6 +8,7 @@ from torch.nn import BatchNorm2d, Linear, MaxPool2d
 from torchvision import transforms, datasets
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
+from PIL import Image
 
 import time
 
@@ -48,6 +49,34 @@ for i in range(12):
     plt.xticks([])
     plt.yticks([])
 plt.show()
+
+### 保存MNIST图片用于测试
+# 创建保存目录
+save_image_dir = './1_Handwritten_Digit_Recognition/data/mnist_test'
+if not os.path.exists(save_image_dir):
+    os.makedirs(save_image_dir)
+    print(f'创建目录: {save_image_dir}')
+
+# 保存前12张图片（每个数字至少一张）
+print('\n保存MNIST测试图片...')
+saved_count = 0
+seen_labels = set()
+
+# 额外保存每个数字的一张图片（0-9）
+print('\n保存每个数字的代表图片...')
+for label in range(10):
+    # 找到第一个该标签的图片
+    for i in range(len(train_dataset)):
+        if train_dataset.train_labels[i].item() == label:
+            img = train_dataset.data[i].numpy()
+            img_pil = Image.fromarray(img, mode='L')
+            filename = f'mnist_digit_{label}.png'
+            filepath = os.path.join(save_image_dir, filename)
+            img_pil.save(filepath)
+            print(f'保存: {filename} (标签: {label})')
+            break
+
+print(f'\n总共保存了 {saved_count + 10} 张测试图片到: {save_image_dir}')
 
 ### 构建简单的CNN网络
 ### 初始输入张量：（batch, 1, 28, 28)，即使b c w h 张量
@@ -231,6 +260,6 @@ if not os.path.exists(save_dir):
 
 # 保存模型
 start_time = time.perf_counter()
-torch.save(model.state_dict, os.path.join(save_dir, 'model_weights.pth'))
+torch.save(model.state_dict(), os.path.join(save_dir, 'model_weights.pth'))
 end_time = time.perf_counter()
 print(f"保存模型时间: {end_time - start_time:.2f} 秒")
